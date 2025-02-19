@@ -4,6 +4,7 @@ from .models import Student
 from rest_framework.parsers import JSONParser
 from .serializers import StudentSerializer
 from rest_framework.renderers import JSONRenderer
+from django.http import HttpResponse, JsonResponse
 
 def student_api(request):
     if request.method == 'GET':
@@ -18,3 +19,16 @@ def student_api(request):
         stu = Student.objects.all()
         serializer = StudentSerializer(stu, many=True)
         return JsonResponse(serializer.data, safe=False)
+    if request.method == 'POST':
+        json_data = request.body
+        stream = io.BytesIO(json_data)
+        pythondata = JSONParser().parse(stream)
+        serializer = StudentSerializer(data = pythondata)
+        if serializer.is_valid():
+            serializer.save()
+            res = {
+                'msg': "Date Created"
+            }
+            json_data = JSONRenderer().render(res)
+            return HttpResponse(json_data, content_type ='application/json')
+    
