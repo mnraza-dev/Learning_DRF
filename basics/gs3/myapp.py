@@ -15,16 +15,16 @@ def get_data(id=None):
         print(data)
     else:
         print(f"Failed to get data. Status code: {r.status_code}")
-get_data() 
+# get_data() 
 
 def post_data():
     data = {
-        'name': 'Ravi',
-        'roll': 107,
-        'city':'Dhanbad'    
+        'name': 'Rahul Maurya',
+        'roll': 1011,
+        'city':'Burhanpur'    
     }
     json_data =json.dumps(data)
     r = requests.post(url = URL, data = json_data)
     data = r.json()
     print(data)
-post_data(data)
+post_data()
