@@ -16,6 +16,13 @@ def get_data(id=None):
     else:
         print(f"Failed to get data. Status code: {r.status_code}")
 
+def post_data():
+    
+    data = {
+        'name': 'Ravi',
+        'roll': 107,
+        'city':'Dhanbad'    
+    }
 
 get_data() 
 # get_data(1) 
