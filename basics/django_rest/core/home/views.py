@@ -9,5 +9,5 @@ from .serializers import StudentSerializer
 def home(request):
     student_data = Student.objects.all()
     serializer = StudentSerializer(student_data, many=True)
-    
-    return  Response({'status':200, 'msg':'Hello from django Rest framework..!'})
+
+    return  Response({'status':200, 'payload': serializer.data})
