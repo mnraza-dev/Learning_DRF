@@ -14,4 +14,4 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         # fields = '__all__'
         # exclude = ['id']
-        fields = ['name', 'city']
+        fields = ['name', 'age', 'email', 'phone', 'city']

@@ -15,5 +15,14 @@ def home(request):
 @api_view(['POST'])
 def post_student(request):
     data = request.data
+    serializer = StudentSerializer(data=request.data)
+    if not serializer.is_valid():
+        Response({
+            'status': 403,
+            'payload': [],
+            'message': 'something went wrong'	
+        })
+    serializer.save()
+
     print(data)
-    return Response({'status':200, 'payload': data, 'message': 'success'})
+    return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
