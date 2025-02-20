@@ -12,7 +12,6 @@ def home(request):
 
 @api_view(['POST'])
 def post_student(request):
-
     data = request.data
     serializer = StudentSerializer(data=request.data)
     if not serializer.is_valid():
@@ -22,6 +21,22 @@ def post_student(request):
             'message': 'something went wrong'	
         })
     serializer.save()
-    
+
     print(data)
     return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
+
+
+@api_view(['POST'])
+def update_student(request, id ):
+    try:
+        serializer = StudentSerializer(data=request.data)
+        if not serializer.is_valid():
+            Response({
+                'status': 403,
+                'payload': [],
+                'message': 'something went wrong'	
+            })
+        serializer.save()
+        return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
+    except Exception as e:
+        return Response({'status':403, 'payload': [], 'message': 'something went wrong'})
