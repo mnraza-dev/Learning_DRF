@@ -22,6 +22,7 @@ def post_student(request):
             'payload': [],
             'message': 'age should be greater than 18'
         })
+    
     if not serializer.is_valid():
         Response({
             'status': 403,
