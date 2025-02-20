@@ -17,7 +17,13 @@ class StudentSerializer(serializers.ModelSerializer):
         fields = ['name', 'age', 'email', 'phone', 'city']
 
     def validate(self, data):
-        age = data.get('age')
-        if age < 18:
+        
+        if data['age'] < 18:
             raise serializers.ValidationError('Age should be greater than 18')
         return data
+    
+        if data['name'] :
+            for n in data['name']:
+                if n.isnumeric():
+                    raise serializers.ValidationError('Name should not contain numbers')
+                
