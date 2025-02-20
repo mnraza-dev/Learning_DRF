@@ -29,7 +29,8 @@ def post_student(request):
 @api_view(['POST'])
 def update_student(request, id ):
     try:
-        serializer = StudentSerializer(data=request.data)
+        student_obj = Student.objects.get(id=id)
+        serializer = StudentSerializer(student_obj, data=request.data)
         if not serializer.is_valid():
             Response({
                 'status': 403,
