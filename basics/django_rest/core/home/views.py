@@ -4,12 +4,10 @@ from rest_framework.response import Response
 from .models import Student
 from .serializers import StudentSerializer
 
-
 @api_view(['GET'])	
 def home(request):
     student_data = Student.objects.all()
     serializer = StudentSerializer(student_data, many=True)
-
     return  Response({'status':200, 'payload': serializer.data})
 
 @api_view(['POST'])
@@ -23,6 +21,5 @@ def post_student(request):
             'message': 'something went wrong'	
         })
     serializer.save()
-
     print(data)
     return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
