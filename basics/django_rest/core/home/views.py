@@ -25,7 +25,6 @@ def post_student(request):
     print(data)
     return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
 
-
 @api_view(['PATCH'])
 def update_student(request, id ):
     try:
@@ -41,3 +40,4 @@ def update_student(request, id ):
         return Response({'status':200, 'payload': serializer.data, 'message': 'success'})
     except Exception as e:
         return Response({'status':403, 'payload': [], 'message': 'something went wrong'})
+    
