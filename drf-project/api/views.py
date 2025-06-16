@@ -9,6 +9,15 @@ from rest_framework.views import APIView
 from django.http import Http404
 from rest_framework import generics, mixins
 from rest_framework import viewsets
+from blogs.models import Blog, Comment
+from blogs.serializers import BlogSerializer, CommentSerializer
+class BlogListView(generics.ListCreateAPIView):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    
+class CommentListView(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 # Employee ModelViewSets
 class EmployeeModelViewSet(viewsets.ModelViewSet):
