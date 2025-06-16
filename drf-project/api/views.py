@@ -21,6 +21,16 @@ class Employees(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class EmployeeDetail(APIView):
+    def get(self, request, pk):
+        try:
+            employee = Employee.objects.get(pk=pk)
+        except Employee.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = EmployeeSerializer(employee)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def put(self, request, pk):
         try:
             employee = Employee.objects.get(pk=pk)
@@ -32,6 +42,7 @@ class Employees(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
     def delete(self, request, pk):
         try:
             employee = Employee.objects.get(pk=pk)
@@ -40,7 +51,6 @@ class Employees(APIView):
 
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
 
 ## API Views for Students
 @api_view(['GET', 'POST'])	
