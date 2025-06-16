@@ -29,20 +29,12 @@ class EmployeeDetail(APIView):
         except Employee.DoesNotExist:
             raise Http404
     def get(self, request, pk):
-        try:
-            employee = self.get_object(pk)
-        except Employee.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
+        employee = self.get_object(pk)
         serializer = EmployeeSerializer(employee)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, pk):
-        try:
-            employee = self.get_object(pk)
-        except Employee.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
+        employee = self.get_object(pk)
         serializer = EmployeeSerializer(employee, data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -50,11 +42,7 @@ class EmployeeDetail(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk):
-        try:
-            employee = self.get_object(pk)
-        except Employee.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
-
+        employee = self.get_object(pk)
         employee.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
