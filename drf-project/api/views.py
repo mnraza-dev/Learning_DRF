@@ -10,6 +10,13 @@ from django.http import Http404
 from rest_framework import generics, mixins
 from rest_framework import viewsets
 
+# Employee ModelViewSets
+class EmployeeModelViewSet(viewsets.ModelViewSet):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
+
+
+"""
 # Employee Viewset
 class EmployeeViewset(viewsets.ViewSet):
     def list(self, request):
@@ -50,7 +57,7 @@ class EmployeeViewset(viewsets.ViewSet):
             return Response(status=status.HTTP_204_NO_CONTENT)
         except Employee.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
+"""
 # Generic API Views for Employees
 """
 class Employees(generics.ListCreateAPIView):
